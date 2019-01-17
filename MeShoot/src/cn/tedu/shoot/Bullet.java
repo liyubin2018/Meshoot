@@ -6,24 +6,12 @@ package cn.tedu.shoot;
  * @author liyub
  *
  */
-public class Bullet {
-	int width;
-	int height;
-	int x;
-	int y;
+public class Bullet extends FlyingObject {
 	int speed;
-	
-	Bullet(int x,int y){
-		width=8;
-		height=14;
-		this.x=x;
-		this.y=y;
-		speed=3;
-		
-	}
 
-	/* 子弹移动 */
-	void step() {
-		System.out.println("子弹的y坐标移动了：" + speed);
+	Bullet(int x, int y) {
+		super(8, 14, x, y);
+		speed = 3;
+
 	}
 }
