@@ -20,4 +20,8 @@ public class Bee extends FlyingObject {
 		yspeed = 1;
 		awardType = rand.nextInt(2);
 	}
+	void step() {
+		System.out.println("小蜜蜂的y坐标移动了："+xspeed
+				+"，小蜜蜂的y坐标移动了："+yspeed);
+	}
 }

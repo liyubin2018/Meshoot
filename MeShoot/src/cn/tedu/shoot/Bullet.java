@@ -14,4 +14,7 @@ public class Bullet extends FlyingObject {
 		speed = 3;
 
 	}
+	void step() {
+		System.out.println("子弹的有坐标移动了："+speed);
+	}
 }

@@ -10,8 +10,8 @@ public class Hero extends FlyingObject {
 
 	Hero() {
 		super(97, 124, 140, 400);
-		life = 3;
-		doublefire = 0;
+		this.life = 3;
+		this.doublefire = 0;
 	}
 
 	/**
@@ -22,6 +22,9 @@ public class Hero extends FlyingObject {
 	 */
 	void moveTo(int x, int y) {
 		System.out.println("英雄机移动了!");
+	}
+	void step() {
+		System.out.println("英雄机切换图片啦");
 	}
 
 }

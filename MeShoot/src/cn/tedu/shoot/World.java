@@ -8,37 +8,38 @@ package cn.tedu.shoot;
 public class World {
 	Sky sky;
 	Hero hero;
-	Airplane[] as;
-	BigAirplane[] bas;
-	Bee[] bs;
-	Bullet[] bts;
+	FlyingObject[] enemies= {};
+	Bullet[] bts= {};
 
 	void action() {// 启动执行测试代码
-		as = new Airplane[10];
-		for (int i = 0; i < as.length; i++) {
-			as[i] = new Airplane();
-			as[i].step();
-			System.out.println(as[i].x + "," + as[i].y);
+		enemies=new FlyingObject[9]; 
+		enemies[0]=new Airplane();
+		enemies[1]=new Airplane();
+		enemies[2]=new Airplane();
+		enemies[3]=new BigAirplane();
+		enemies[4]=new BigAirplane();
+		enemies[5]=new BigAirplane();
+		enemies[6]=new Bee();
+		enemies[7]=new Bee();
+		enemies[8]=new Bee();
+		for (int i = 0; i < enemies.length; i++) {
+			FlyingObject f=enemies[i];
+			f.step();
+			System.out.println(f.width+","+f.height+","+","+f.x+","+f.y);
 		}
-		bas = new BigAirplane[10];
-		for (int i = 0; i < bas.length; i++) {
-			bas[i] = new BigAirplane();
-			bas[i].step();
-			System.out.println(bas[i].x + "," + bas[i].y);
+		bts= new Bullet[3];
+		bts[0]=new Bullet(36,68);
+		bts[1]=new Bullet(120,354);
+		bts[2]=new Bullet(320,652);
+		for (int i = 0; i < bts.length; i++) {
+			bts[i].step();
 		}
-		bs = new Bee[10];
-		for (int i = 0; i < bs.length; i++) {
-			bs[i] = new Bee();
-			bs[i].step();
-			System.out.println(bs[i].x + "," + bs[i].y);
-		}
-		bts = new Bullet[3];
-		bts[0] = new Bullet(100, 512);
-		bts[0].step();
-		bts[1] = new Bullet(65, 186);
-		bts[1].step();
-		bts[2] = new Bullet(65, 20);
-		bts[2].step();
+		sky=new Sky();
+		sky.step();
+		hero=new Hero();
+		hero.step();
+		hero.moveTo(12, 100);
+		
 
 	}
 

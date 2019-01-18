@@ -13,5 +13,8 @@ public class Airplane extends FlyingObject {
 		super(49, 36);
 		speed = 1;
 	}
+	void step() {
+		System.out.println("小敌机的y坐标移动了：！"+speed);
+	}
 
 }

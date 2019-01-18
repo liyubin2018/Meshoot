@@ -15,4 +15,7 @@ public class Sky extends FlyingObject {
 		speed = 1;
 		y1 = -height;
 	}
+	void step() {
+		System.out.println("天空移动了："+speed);
+	}
 }

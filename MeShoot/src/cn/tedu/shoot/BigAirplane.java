@@ -1,7 +1,5 @@
 package cn.tedu.shoot;
 
-import java.util.Random;
-
 /**
  * 大敌机
  * 
@@ -14,5 +12,8 @@ public class BigAirplane extends FlyingObject {
 	BigAirplane() {
 		super(69, 99);
 		speed = 1;
+	}
+	void step() {
+		System.out.println("大敌机的y坐标移动了:"+speed);
 	}
 }
