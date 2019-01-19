@@ -1,11 +1,12 @@
 package cn.tedu.shoot;
-
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 /**
  * 测试类
  * 
  * @author liyub 整个世界
  */
-public class World {
+public class World extends JPanel{
 	Sky sky;
 	Hero hero;
 	FlyingObject[] enemies= {};
@@ -44,8 +45,16 @@ public class World {
 	}
 
 	public static void main(String[] args) {
-		World world = new World();// 创建世界
-		world.action();// 启动执行
+//		World world = new World();// 创建世界
+//		world.action();// 启动执行
+		JFrame frame = new JFrame(); //创建一个窗口对象
+		World world = new World(); //创建一个面板对象
+		frame.add(world); //将面板添加到窗口中
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //设置关闭窗口时退出程序
+		frame.setSize(400,700); //设置窗口的大小
+		frame.setLocationRelativeTo(null); //设置窗口居中显示 
+		frame.setVisible(true); //1)设置窗口可见  2)尽快调用paint()
+		world.action();
 
 	}
 
