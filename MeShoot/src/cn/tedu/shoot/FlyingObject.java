@@ -9,23 +9,23 @@ import java.util.Random;
  *
  */
 public class FlyingObject {
-	int width;// 宽
-	int height;// 高
-	int x;// x坐标
-	int y;// y坐标
+	protected int width;// 宽
+	protected int height;// 高
+	protected int x;// x坐标
+	protected int y;// y坐标
 
-	FlyingObject() {
+	public FlyingObject() {
 
 	}
 
-	FlyingObject(int width, int height, int x, int y) {
+	public FlyingObject(int width, int height, int x, int y) {
 		this.width = width;
 		this.height = height;
 		this.x = x;
 		this.y = y;
 	}
 
-	FlyingObject(int width, int height) {// 供给大敌机，小敌机，小蜜蜂调用的有参构造方法
+	public FlyingObject(int width, int height) {// 供给大敌机，小敌机，小蜜蜂调用的有参构造方法
 		this.width = width;
 		this.height = height;
 		Random rand = new Random();// 随机数对象
@@ -34,7 +34,7 @@ public class FlyingObject {
 	}
 
 	/* 飞行物移动 */
-	void step() {
+	public void step() {
 		System.out.println("飞行物移动了！");
 	}
 }

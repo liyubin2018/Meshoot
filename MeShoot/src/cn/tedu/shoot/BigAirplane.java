@@ -7,13 +7,13 @@ package cn.tedu.shoot;
  *
  */
 public class BigAirplane extends FlyingObject {
-	int speed;// 移动速度
+	private int speed;// 移动速度
 
-	BigAirplane() {
+	public BigAirplane() {
 		super(69, 99);
 		speed = 1;
 	}
-	void step() {
+	public void step() {
 		System.out.println("大敌机的y坐标移动了:"+speed);
 	}
 }

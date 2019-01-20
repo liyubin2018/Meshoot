@@ -5,10 +5,10 @@ package cn.tedu.shoot;
  * @author liyub 英雄机
  */
 public class Hero extends FlyingObject {
-	int life;// 生命
-	int doublefire;
+	private int life;// 生命
+	private int doublefire;
 
-	Hero() {
+	public Hero() {
 		super(97, 124, 140, 400);
 		this.life = 3;
 		this.doublefire = 0;
@@ -20,10 +20,10 @@ public class Hero extends FlyingObject {
 	 * @param x
 	 * @param y
 	 */
-	void moveTo(int x, int y) {
+	public void moveTo(int x, int y) {
 		System.out.println("英雄机移动了!");
 	}
-	void step() {
+	public void step() {
 		System.out.println("英雄机切换图片啦");
 	}
 

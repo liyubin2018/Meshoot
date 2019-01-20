@@ -6,13 +6,14 @@ import javax.swing.JPanel;
  * 
  * @author liyub 整个世界
  */
+@SuppressWarnings("serial")
 public class World extends JPanel{
 	Sky sky;
 	Hero hero;
 	FlyingObject[] enemies= {};
 	Bullet[] bts= {};
 
-	void action() {// 启动执行测试代码
+	public void action() {// 启动执行测试代码
 		enemies=new FlyingObject[9]; 
 		enemies[0]=new Airplane();
 		enemies[1]=new Airplane();

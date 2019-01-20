@@ -7,15 +7,15 @@ package cn.tedu.shoot;
  *
  */
 public class Sky extends FlyingObject {
-	int y1;// y1坐标(图片轮换)
-	int speed;
+	private int y1;// y1坐标(图片轮换)
+	private int speed;
 
-	Sky() {
+	public Sky() {
 		super(400, 700, 0, 0);
 		speed = 1;
 		y1 = -height;
 	}
-	void step() {
+	public void step() {
 		System.out.println("天空移动了："+speed);
 	}
 }
