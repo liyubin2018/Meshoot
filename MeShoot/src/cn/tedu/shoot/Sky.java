@@ -1,4 +1,5 @@
 package cn.tedu.shoot;
+import java.awt.image.BufferedImage;
 
 /**
  * 天空
@@ -7,11 +8,16 @@ package cn.tedu.shoot;
  *
  */
 public class Sky extends FlyingObject {
+	@SuppressWarnings("unused")
+	private static BufferedImage image;//图片
+	static {
+		image=loadImage("background.png");
+	}
 	private int y1;// y1坐标(图片轮换)
 	private int speed;
 
 	public Sky() {
-		super(400, 700, 0, 0);
+		super(World.WEIGTH, World.HEIGTH, 0, 0);
 		speed = 1;
 		y1 = -height;
 	}

@@ -1,5 +1,6 @@
 package cn.tedu.shoot;
 
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 /**
@@ -9,6 +10,13 @@ import java.util.Random;
  *
  */
 public class Bee extends FlyingObject {
+	private static BufferedImage[] images;
+	static {
+		images=new BufferedImage[5];
+		for (int i = 0; i < images.length; i++) {
+			images[i]=loadImage("bee"+i+".png");
+		}
+	}
 	private int xspeed;// x方向的移动速度
 	private int yspeed;// y方向的移动速度
 	private int awardType;// 打下小蜜蜂的奖励（0或1）

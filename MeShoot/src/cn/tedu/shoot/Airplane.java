@@ -1,5 +1,7 @@
 package cn.tedu.shoot;
 
+import java.awt.image.BufferedImage;
+
 /**
  * 小敌机
  * 
@@ -7,6 +9,13 @@ package cn.tedu.shoot;
  *
  */
 public class Airplane extends FlyingObject {
+	private static BufferedImage[] images;
+	static {
+		images=new BufferedImage[5];
+		for (int i = 0; i < images.length; i++) {
+			images[i]=loadImage("airplane"+i+".png");
+		}
+	}
 	private int speed;// 移动速度
 
 	public Airplane() {

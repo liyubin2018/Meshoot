@@ -8,10 +8,12 @@ import javax.swing.JPanel;
  */
 @SuppressWarnings("serial")
 public class World extends JPanel{
-	Sky sky;
-	Hero hero;
-	FlyingObject[] enemies= {};
-	Bullet[] bts= {};
+	public static final int WEIGTH=400;
+	public static final int HEIGTH=700; 
+	private Sky sky;
+	private Hero hero;
+	private FlyingObject[] enemies= {};
+	private Bullet[] bts= {};
 
 	public void action() {// 启动执行测试代码
 		enemies=new FlyingObject[9]; 
@@ -52,7 +54,7 @@ public class World extends JPanel{
 		World world = new World(); //创建一个面板对象
 		frame.add(world); //将面板添加到窗口中
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //设置关闭窗口时退出程序
-		frame.setSize(400,700); //设置窗口的大小
+		frame.setSize(WIDTH,HEIGHT); //设置窗口的大小
 		frame.setLocationRelativeTo(null); //设置窗口居中显示 
 		frame.setVisible(true); //1)设置窗口可见  2)尽快调用paint()
 		world.action();

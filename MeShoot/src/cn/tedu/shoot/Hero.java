@@ -1,10 +1,18 @@
 package cn.tedu.shoot;
+import java.awt.image.BufferedImage;
 
 /**
  * 
  * @author liyub 英雄机
  */
 public class Hero extends FlyingObject {
+	private static BufferedImage[] images;
+	static {
+		images=new BufferedImage[6];
+		for (int i = 0; i < images.length; i++) {
+			images[i]=loadImage("hero"+i+".png");
+		}
+	}
 	private int life;// 生命
 	private int doublefire;
 
