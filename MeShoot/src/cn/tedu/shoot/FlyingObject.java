@@ -3,7 +3,7 @@ package cn.tedu.shoot;
 import java.util.Random;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-	
+
 /**
  * 飞行物类
  * 
@@ -31,7 +31,7 @@ public class FlyingObject {
 		this.width = width;
 		this.height = height;
 		Random rand = new Random();// 随机数对象
-		x = rand.nextInt(World.WEIGTH - width);// 产生0到400-width的随机数
+		x = rand.nextInt(World.WIDTH - width);// 产生0到400-width的随机数
 		y = -this.height;
 	}
 
@@ -39,19 +39,18 @@ public class FlyingObject {
 	public void step() {
 		System.out.println("飞行物移动了！");
 	}
-	//加载/读取对象图片，fileName图片的文件名
+
+	// 加载/读取对象图片，fileName图片的文件名
 	public static BufferedImage loadImage(String fileName) {
 		try {
-			BufferedImage img=ImageIO.read(FlyingObject.class.getResource(fileName));
-	
-		return img;	
-		}catch(Exception e){
+			BufferedImage img = ImageIO.read(FlyingObject.class.getResource(fileName));
+
+			return img;
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException();
-			
+
 		}
 	}
-	
-	
-	
+
 }

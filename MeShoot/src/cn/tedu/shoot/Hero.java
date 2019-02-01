@@ -1,4 +1,5 @@
 package cn.tedu.shoot;
+
 import java.awt.image.BufferedImage;
 
 /**
@@ -8,9 +9,9 @@ import java.awt.image.BufferedImage;
 public class Hero extends FlyingObject {
 	private static BufferedImage[] images;
 	static {
-		images=new BufferedImage[6];
+		images = new BufferedImage[6];
 		for (int i = 0; i < images.length; i++) {
-			images[i]=loadImage("hero"+i+".png");
+			images[i] = loadImage("hero" + i + ".png");
 		}
 	}
 	private int life;// 生命
@@ -31,6 +32,7 @@ public class Hero extends FlyingObject {
 	public void moveTo(int x, int y) {
 		System.out.println("英雄机移动了!");
 	}
+
 	public void step() {
 		System.out.println("英雄机切换图片啦");
 	}

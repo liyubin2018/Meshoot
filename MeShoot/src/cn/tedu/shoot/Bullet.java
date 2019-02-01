@@ -1,4 +1,5 @@
 package cn.tedu.shoot;
+
 import java.awt.image.BufferedImage;
 
 /**
@@ -10,7 +11,7 @@ import java.awt.image.BufferedImage;
 public class Bullet extends FlyingObject {
 	private static BufferedImage image;
 	static {
-		image=loadImage("bullet.png");
+		image = loadImage("bullet.png");
 	}
 	private int speed;
 
@@ -19,7 +20,8 @@ public class Bullet extends FlyingObject {
 		speed = 3;
 
 	}
+
 	public void step() {
-		System.out.println("子弹的有坐标移动了："+speed);
+		System.out.println("子弹的有坐标移动了：" + speed);
 	}
 }

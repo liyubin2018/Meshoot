@@ -11,9 +11,9 @@ import java.awt.image.BufferedImage;
 public class Airplane extends FlyingObject {
 	private static BufferedImage[] images;
 	static {
-		images=new BufferedImage[5];
+		images = new BufferedImage[5];
 		for (int i = 0; i < images.length; i++) {
-			images[i]=loadImage("airplane"+i+".png");
+			images[i] = loadImage("airplane" + i + ".png");
 		}
 	}
 	private int speed;// 移动速度
@@ -22,8 +22,9 @@ public class Airplane extends FlyingObject {
 		super(49, 36);
 		speed = 1;
 	}
+
 	public void step() {
-		System.out.println("小敌机的y坐标移动了：！"+speed);
+		System.out.println("小敌机的y坐标移动了：！" + speed);
 	}
 
 }
