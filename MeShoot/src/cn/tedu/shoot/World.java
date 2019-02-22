@@ -2,6 +2,7 @@ package cn.tedu.shoot;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.Graphics;
 
 /**
  * 测试类
@@ -12,45 +13,32 @@ import javax.swing.JPanel;
 public class World extends JPanel {
 	public static final int WIDTH = 400;
 	public static final int HEIGTH = 700;
-	private Sky sky;
-	private Hero hero;
+	private Sky sky=new Sky();
+	private Hero hero=new Hero();
 	private FlyingObject[] enemies = {};
 	private Bullet[] bts = {};
 
 	public void action() {// 启动执行测试代码
-		enemies = new FlyingObject[9];
-		enemies[0] = new Airplane();
-		enemies[1] = new Airplane();
-		enemies[2] = new Airplane();
-		enemies[3] = new BigAirplane();
-		enemies[4] = new BigAirplane();
-		enemies[5] = new BigAirplane();
-		enemies[6] = new Bee();
-		enemies[7] = new Bee();
-		enemies[8] = new Bee();
-		for (int i = 0; i < enemies.length; i++) {
-			FlyingObject f = enemies[i];
-			f.step();
-			System.out.println(f.width + "," + f.height + "," + "," + f.x + "," + f.y);
-		}
-		bts = new Bullet[3];
-		bts[0] = new Bullet(36, 68);
-		bts[1] = new Bullet(120, 354);
-		bts[2] = new Bullet(320, 652);
-		for (int i = 0; i < bts.length; i++) {
-			bts[i].step();
-		}
-		sky = new Sky();
-		sky.step();
-		hero = new Hero();
-		hero.step();
-		hero.moveTo(12, 100);
-
+//		enemies=new FlyingObject[3];
+//		enemies[0]=new Airplane();
+//		enemies[1]=new BigAirplane();
+//		enemies[2]=new Bee();
+//		bts=new Bullet[2];
+//		bts[0]=new Bullet(50,100);
+//		bts[1]=new Bullet(100,200);
 	}
-
+	/**重写paint()方法*/
+public void paint(Graphics g) {
+	sky.paintObject(g);//画天空
+	hero.paintObject(g);//画英雄机
+	for (int i = 0; i < enemies.length; i++) {
+		enemies[i].paintObject(g);//画敌人
+	}
+	for (int i = 0; i < bts.length; i++) {
+		bts[i].paintObject(g);
+	}
+}
 	public static void main(String[] args) {
-//		World world = new World();// 创建世界
-//		world.action();// 启动执行
 		JFrame frame = new JFrame(); // 创建一个窗口对象
 		World world = new World(); // 创建一个面板对象
 		frame.add(world); // 将面板添加到窗口中
@@ -58,7 +46,9 @@ public class World extends JPanel {
 		frame.setSize(WIDTH, HEIGTH); // 设置窗口的大小
 		frame.setLocationRelativeTo(null); // 设置窗口居中显示
 		frame.setVisible(true); // 1)设置窗口可见 2)尽快调用paint()
-		world.action();
+		
+		
+		world.action();// 启动执行
 
 	}
 

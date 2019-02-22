@@ -1,5 +1,6 @@
 package cn.tedu.shoot;
 
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 /**
@@ -26,4 +27,15 @@ public class Sky extends FlyingObject {
 	public void step() {
 		System.out.println("天空移动了：" + speed);
 	}
+	/**重写getImage()方法，获取图片*/
+	public BufferedImage getImage() {
+		return image;
+	}
+	
+	/**画对象 g:画笔*/
+	public void paintObject(Graphics g) {
+		g.drawImage(getImage(),x,y,null);
+		g.drawImage(getImage(),x,y1,null);
+	}
+	
 }

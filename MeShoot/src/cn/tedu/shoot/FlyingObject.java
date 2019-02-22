@@ -3,6 +3,7 @@ package cn.tedu.shoot;
 import java.util.Random;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import java.awt.Graphics;
 
 /**
  * 飞行物类
@@ -10,7 +11,12 @@ import javax.imageio.ImageIO;
  * @author liyub
  *
  */
-public class FlyingObject {
+public abstract class FlyingObject {
+	public static final int LIFE=0;
+	public static final int DEAD=1;
+	public static final int REMOVE=2;
+	protected int state=LIFE;
+	
 	protected int width;// 宽
 	protected int height;// 高
 	protected int x;// x坐标
@@ -35,12 +41,33 @@ public class FlyingObject {
 		y = -this.height;
 	}
 
-	/* 飞行物移动 */
-	public void step() {
-		System.out.println("飞行物移动了！");
+	/**飞行物移动 */
+	public abstract void step();
+	
+	/** 获取图片*/
+	public abstract BufferedImage getImage();
+	
+	/**画对象 g:画笔*/
+	public void paintObject(Graphics g) {
+		g.drawImage(getImage(),x,y,null);
+	}
+	
+	
+	/** 判断是否活着  */
+	public boolean isLife() {
+		return state==LIFE;
+		
+	}
+	/**判断是否死亡*/
+	public boolean isDead() {
+		return state==DEAD;
+	}
+	/**判断是否移动*/
+	public boolean isRemove() {
+		return state==REMOVE;
 	}
 
-	// 加载/读取对象图片，fileName图片的文件名
+	/** 加载/读取对象图片，fileName图片的文件名*/
 	public static BufferedImage loadImage(String fileName) {
 		try {
 			BufferedImage img = ImageIO.read(FlyingObject.class.getResource(fileName));

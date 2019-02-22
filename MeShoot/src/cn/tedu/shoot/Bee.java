@@ -32,4 +32,20 @@ public class Bee extends FlyingObject {
 	public void step() {
 		System.out.println("小蜜蜂的y坐标移动了：" + xspeed + "，小蜜蜂的y坐标移动了：" + yspeed);
 	}
+	
+	
+	/**重写getImage()方法，获取图片*/
+	private int deadIndex=1;
+	public BufferedImage getImage() {
+		if (isLife()) {
+			return images[0];
+		} else if(isDead()){
+			BufferedImage img=images[deadIndex++];
+			if(deadIndex==images.length) {
+				state=REMOVE;
+			}
+			return img;
+		}
+		return null;
+	}
 }

@@ -27,4 +27,20 @@ public class Airplane extends FlyingObject {
 		System.out.println("小敌机的y坐标移动了：！" + speed);
 	}
 
+	/** 重写getImage()方法，获取图片 */
+	private int deadIndex = 1;
+
+	public BufferedImage getImage() {
+		if (isLife()) {
+			return images[0];
+		} else if (isDead()) {
+			BufferedImage img = images[deadIndex++];
+			if (deadIndex == images.length) {
+				state = REMOVE;
+			}
+			return img;
+		}
+		return null;
+	}
+
 }
