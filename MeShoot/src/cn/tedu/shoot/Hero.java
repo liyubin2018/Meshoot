@@ -36,18 +36,18 @@ public class Hero extends FlyingObject {
 	public void step() {
 		System.out.println("英雄机切换图片啦");
 	}
-	
-	private int index=0;//活着的下标
-	private int deadIndex=2;//死了的下标
-	
-	/**重写getImage()方法，获取图片*/
+
+	private int index = 0;// 活着的下标
+	private int deadIndex = 2;// 死了的下标
+
+	/** 重写getImage()方法，获取图片 */
 	public BufferedImage getImage() {
-		if (isLife()) {//如果活着，切换两张图片
-			return images[index++%2];
-		} else if(isDead()){//如果死亡
-			BufferedImage img=images[deadIndex++];
-			if (deadIndex==images.length) {
-				state=REMOVE;
+		if (isLife()) {// 如果活着，切换两张图片
+			return images[index++ % 2];
+		} else if (isDead()) {// 如果死亡
+			BufferedImage img = images[deadIndex++];
+			if (deadIndex == images.length) {
+				state = REMOVE;
 			}
 			return img;
 		}

@@ -24,12 +24,13 @@ public class Bullet extends FlyingObject {
 	public void step() {
 		System.out.println("子弹的有坐标移动了：" + speed);
 	}
-	/**重写getImage()方法，获取图片*/
+
+	/** 重写getImage()方法，获取图片 */
 	public BufferedImage getImage() {
 		if (isLife()) {
 			return image;
-		}else if(isDead()) {
-			state=REMOVE;
+		} else if (isDead()) {
+			state = REMOVE;
 		}
 		return null;
 	}
