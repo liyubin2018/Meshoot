@@ -24,7 +24,7 @@ public class BigAirplane extends FlyingObject {
 	}
 
 	public void step() {
-		System.out.println("大敌机的y坐标移动了:" + speed);
+		y+=speed;//大敌机向下移动
 	}
 
 	/** 重写getImage()方法，获取图片 */

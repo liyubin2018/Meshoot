@@ -21,7 +21,8 @@ public abstract class FlyingObject {
 	protected int height;// 高
 	protected int x;// x坐标
 	protected int y;// y坐标
-
+	
+	/**默认构造*/
 	public FlyingObject() {
 
 	}

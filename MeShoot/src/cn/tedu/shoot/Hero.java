@@ -34,7 +34,7 @@ public class Hero extends FlyingObject {
 	}
 
 	public void step() {
-		System.out.println("英雄机切换图片啦");
+		
 	}
 
 	private int index = 0;// 活着的下标
@@ -42,6 +42,7 @@ public class Hero extends FlyingObject {
 
 	/** 重写getImage()方法，获取图片 */
 	public BufferedImage getImage() {
+
 		if (isLife()) {// 如果活着，切换两张图片
 			return images[index++ % 2];
 		} else if (isDead()) {// 如果死亡
@@ -53,5 +54,21 @@ public class Hero extends FlyingObject {
 		}
 		return null;
 	}
+	
+	/**英雄机发射子弹（创建子弹对象）*/
+	public Bullet[] shoot() {
+		int xStep=this.width/4;
+		int yStep=20;
+		if (doublefire==1) {
+			Bullet[] bs=new Bullet[2];
+			bs[0]=new Bullet(this.x+1*xStep, this.y-yStep);
+			bs[1]=new Bullet(this.x+3*xStep, this.y-yStep);
 
+			return bs;
+		} else {
+			Bullet[] bs=new Bullet[1];
+			bs[0]=new Bullet(this.x+2*xStep, this.y-yStep);
+			return bs;
+		}
+	}
 }

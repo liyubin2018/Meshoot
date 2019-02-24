@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Random;
+import java.util.Arrays;
 
 /**
  * 测试类
@@ -19,6 +21,43 @@ public class World extends JPanel {
 	private Hero hero = new Hero();
 	private FlyingObject[] enemies = {};
 	private Bullet[] bts = {};
+	
+	/**创建敌人对象*/
+	public FlyingObject nextOne() {
+		Random rand=new Random();
+		int type=rand.nextInt(20);
+		if(type<10) {
+			return new Airplane();
+		}else if(type<14) {
+			return new BigAirplane();
+		}else {
+			return new Bee();
+		}
+	}	
+	
+	int enterIndex=0;
+	/**敌人入场*/
+	public void enterdAction() {
+		enterIndex++;
+		if (enterIndex%30==0) {
+			FlyingObject obj=nextOne();
+			enemies=Arrays.copyOf(enemies,enemies.length+1);
+			enemies[enemies.length-1]=obj;
+		}
+		
+	}
+	
+	public void stupAction() {//10毫秒走一次
+		sky.step();
+		
+		for (int i = 0; i < bts.length; i++) {
+			bts[i].step();
+		}
+		for (int i = 0; i < enemies.length; i++) {
+			enemies[i].step();
+		}
+		
+	}
 	/**程序启动执行*/
 	public void action() {// 启动执行测试代码
 		/*1，敌人入场
@@ -32,7 +71,13 @@ public class World extends JPanel {
 		timer.schedule(new TimerTask() {
 			@Override//重写计时方法
 			public void run() {
-				
+			enterdAction();
+			System.out.println(enemies.length);
+			stupAction();//飞行物移动
+			
+			
+			repaint();
+			
 			}
 		},10,10);//定时任务
 	}

@@ -30,7 +30,11 @@ public class Bee extends FlyingObject {
 	}
 
 	public void step() {
-		System.out.println("小蜜蜂的y坐标移动了：" + xspeed + "，小蜜蜂的y坐标移动了：" + yspeed);
+		y+=yspeed;
+		x+=xspeed;
+		if (x<=0||x>=World.WIDTH) {//判断小蜜蜂是否移动到窗口边缘
+			xspeed*=-1;
+		}
 	}
 
 	/** 重写getImage()方法，获取图片 */

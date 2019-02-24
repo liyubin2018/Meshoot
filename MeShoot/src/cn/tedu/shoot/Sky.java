@@ -25,7 +25,14 @@ public class Sky extends FlyingObject {
 	}
 
 	public void step() {
-		System.out.println("天空移动了：" + speed);
+		y+=speed;
+		y1+=speed;
+		if (y>=this.height) {
+			y=-this.height;
+		}
+		if (y1>=this.height) {
+			y1=-this.height;
+		}
 	}
 
 	/** 重写getImage()方法，获取图片 */

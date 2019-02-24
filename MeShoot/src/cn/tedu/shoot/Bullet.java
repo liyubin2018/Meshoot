@@ -13,16 +13,17 @@ public class Bullet extends FlyingObject {
 	static {
 		image = loadImage("bullet.png");
 	}
-	private int speed;
+	private int speed=3;
 
 	public Bullet(int x, int y) {
 		super(8, 14, x, y);
 		speed = 3;
 
 	}
-
+	
+	/**子弹移动*/
 	public void step() {
-		System.out.println("子弹的有坐标移动了：" + speed);
+		y-=speed;//向上移动
 	}
 
 	/** 重写getImage()方法，获取图片 */
