@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * @author liyub
  *
  */
-public class BigAirplane extends FlyingObject {
+	public class BigAirplane extends FlyingObject {
 	private static BufferedImage[] images;
 	static {
 		images = new BufferedImage[5];
@@ -27,9 +27,14 @@ public class BigAirplane extends FlyingObject {
 		y+=speed;//大敌机向下移动
 	}
 
+	@Override//重写outOfBounds方法
+	public boolean outOfBounds() {
+		return this.y>=World.HEIGTH;
+		
+	}
+	
 	/** 重写getImage()方法，获取图片 */
 	private int deadIndex = 1;
-
 	public BufferedImage getImage() {
 		if (isLife()) {
 			return images[0];

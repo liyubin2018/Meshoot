@@ -20,7 +20,7 @@ public class Hero extends FlyingObject {
 	public Hero() {
 		super(97, 124, 140, 400);
 		this.life = 3;
-		this.doublefire = 0;
+		this.doublefire = 100;
 	}
 
 	/**
@@ -30,7 +30,8 @@ public class Hero extends FlyingObject {
 	 * @param y
 	 */
 	public void moveTo(int x, int y) {
-		System.out.println("英雄机移动了!");
+		this.x=x-this.width/2;
+		this.y=y-this.height/2;	
 	}
 
 	public void step() {
@@ -39,7 +40,13 @@ public class Hero extends FlyingObject {
 
 	private int index = 0;// 活着的下标
 	private int deadIndex = 2;// 死了的下标
-
+	
+	@Override//重写outOfBounds方法
+	public boolean outOfBounds() {
+		return false;
+		
+	}
+	
 	/** 重写getImage()方法，获取图片 */
 	public BufferedImage getImage() {
 
@@ -58,14 +65,14 @@ public class Hero extends FlyingObject {
 	/**英雄机发射子弹（创建子弹对象）*/
 	public Bullet[] shoot() {
 		int xStep=this.width/4;
-		int yStep=20;
-		if (doublefire==1) {
+		int yStep=10;
+		if (doublefire>0) {//双倍火力
 			Bullet[] bs=new Bullet[2];
 			bs[0]=new Bullet(this.x+1*xStep, this.y-yStep);
 			bs[1]=new Bullet(this.x+3*xStep, this.y-yStep);
-
+			doublefire-=2;//火力值减2
 			return bs;
-		} else {
+		} else {//单倍火力
 			Bullet[] bs=new Bullet[1];
 			bs[0]=new Bullet(this.x+2*xStep, this.y-yStep);
 			return bs;

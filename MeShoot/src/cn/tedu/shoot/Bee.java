@@ -36,10 +36,15 @@ public class Bee extends FlyingObject {
 			xspeed*=-1;
 		}
 	}
-
+	
+	@Override//重写outOfBounds方法
+	public boolean outOfBounds() {
+		return this.y>=World.HEIGTH;
+		
+	}
+	
 	/** 重写getImage()方法，获取图片 */
 	private int deadIndex = 1;
-
 	public BufferedImage getImage() {
 		if (isLife()) {
 			return images[0];

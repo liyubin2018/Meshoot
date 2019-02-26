@@ -17,7 +17,7 @@ public class Bullet extends FlyingObject {
 
 	public Bullet(int x, int y) {
 		super(8, 14, x, y);
-		speed = 3;
+		speed = 8;
 
 	}
 	
@@ -25,7 +25,13 @@ public class Bullet extends FlyingObject {
 	public void step() {
 		y-=speed;//向上移动
 	}
-
+	
+	@Override//重写outOfBounds方法
+	public boolean outOfBounds() {
+		return this.y>=this.height;
+		
+	}
+		
 	/** 重写getImage()方法，获取图片 */
 	public BufferedImage getImage() {
 		if (isLife()) {

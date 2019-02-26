@@ -7,7 +7,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Random;
 import java.util.Arrays;
-
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 /**
  * 测试类
  * 
@@ -47,7 +48,7 @@ public class World extends JPanel {
 		
 	}
 	
-	public void stupAction() {//10毫秒走一次
+	public void stepAction() {//10毫秒走一次
 		sky.step();
 		
 		for (int i = 0; i < bts.length; i++) {
@@ -58,25 +59,70 @@ public class World extends JPanel {
 		}
 		
 	}
+	int shootIndex=0;//子弹发射计数
+	/**子弹入场*/
+	public void shootAction() {//10毫秒走一次
+		shootIndex++;
+		if (shootIndex%10==0) {//每100毫秒走一次
+			Bullet[] bs=hero.shoot();
+			bts=Arrays.copyOf(bts, bts.length+bs.length);//bs有几发子弹就扩容几
+			System.arraycopy(bs, 0, bts,bts.length-bs.length,bs.length);
+		}
+	}
+	/**删除越界的飞行物*/
+	public void outOfBoundsAction() {
+		int index=0;
+		FlyingObject[] enemyLives=new FlyingObject[enemies.length];
+		for (int i = 0; i < enemies.length; i++) {
+			FlyingObject f=enemies[i];
+			if (!f.outOfBounds()) {
+				enemyLives[index]=f;
+				index++;
+			}
+		}
+		enemies=Arrays.copyOf(enemyLives, index);
+		index=0;
+	}
+	
+	/**删除越界子弹*/
+	public void outOfBulletAction() {
+//		int index=0;
+//		Bullet[] btsLives=new Bullet[bts.length];
+//		for (int i = 0; i < bts.length; i++) {
+//			Bullet b=bts[i];
+//			if (!b.outOfBounds()) {
+//				btsLives[index]=b;
+//				index++;
+//			}
+//		}
+//		bts=Arrays.copyOf(btsLives, index);
+//		index=0;
+	}
+	
 	/**程序启动执行*/
 	public void action() {// 启动执行测试代码
-		/*1，敌人入场
-		 *2，飞行物移动
-		 *3，子弹入场
-		 *4英雄机随鼠标移动
-		 *5子弹与敌人碰撞
-		 *7，敌人与英雄机相撞
-		 */
+		/**创建侦听器对象*/
+		MouseAdapter l=new MouseAdapter() {
+			public void mouseMoved(MouseEvent e) {
+				int x=e.getX();//获取鼠标x
+				int y=e.getY();//获取鼠标y
+				hero.moveTo(x, y);//调用英雄机随鼠标移动的方法
+			}	
+		};
+		this.addMouseListener(l);//处理鼠标移动事件
+		this.addMouseMotionListener(l);
+		
 		Timer timer=new Timer();//创建定时对象
 		timer.schedule(new TimerTask() {
 			@Override//重写计时方法
 			public void run() {
 			enterdAction();
 			System.out.println(enemies.length);
-			stupAction();//飞行物移动
-			
-			
-			repaint();
+			stepAction();//飞行物移动
+			shootAction(); //子弹入场
+			outOfBoundsAction();//删除越界的飞行物
+			outOfBulletAction();
+			repaint();//重画(重新调用paint()方法);
 			
 			}
 		},10,10);//定时任务

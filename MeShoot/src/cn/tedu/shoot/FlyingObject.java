@@ -68,8 +68,9 @@ public abstract class FlyingObject {
 	public boolean isRemove() {
 		return state == REMOVE;
 	}
-
-	/** 加载/读取对象图片，fileName图片的文件名 */
+	
+	public abstract boolean outOfBounds();	
+	
 	public static BufferedImage loadImage(String fileName) {
 		try {
 			BufferedImage img = ImageIO.read(FlyingObject.class.getResource(fileName));
