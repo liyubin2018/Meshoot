@@ -25,22 +25,22 @@ public class Sky extends FlyingObject {
 	}
 
 	public void step() {
-		y+=speed;
-		y1+=speed;
-		if (y>=this.height) {
-			y=-this.height;
+		y += speed;
+		y1 += speed;
+		if (y >= this.height) {
+			y = -this.height;
 		}
-		if (y1>=this.height) {
-			y1=-this.height;
+		if (y1 >= this.height) {
+			y1 = -this.height;
 		}
 	}
-	
-	@Override//重写outOfBounds方法
+
+	@Override // 重写outOfBounds方法
 	public boolean outOfBounds() {
-		return false;//天空永不越界
-		
+		return false;// 天空永不越界
+
 	}
-	
+
 	/** 重写getImage()方法，获取图片 */
 	public BufferedImage getImage() {
 		return image;

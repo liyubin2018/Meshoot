@@ -9,6 +9,7 @@ import java.util.Random;
 import java.util.Arrays;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 /**
  * 测试类
  * 
@@ -22,73 +23,77 @@ public class World extends JPanel {
 	private Hero hero = new Hero();
 	private FlyingObject[] enemies = {};
 	private Bullet[] bts = {};
-	
-	/**创建敌人对象*/
+
+	/** 创建敌人对象 */
 	public FlyingObject nextOne() {
-		Random rand=new Random();
-		int type=rand.nextInt(20);
-		if(type<10) {
+		Random rand = new Random();
+		int type = rand.nextInt(20);
+		if (type < 10) {
 			return new Airplane();
-		}else if(type<14) {
+		} else if (type < 18) {
 			return new BigAirplane();
-		}else {
+		} else {
 			return new Bee();
 		}
-	}	
-	
-	int enterIndex=0;
-	/**敌人入场*/
+	}
+
+	int enterIndex = 0;
+
+	/** 敌人入场 */
 	public void enterdAction() {
 		enterIndex++;
-		if (enterIndex%30==0) {
-			FlyingObject obj=nextOne();
-			enemies=Arrays.copyOf(enemies,enemies.length+1);
-			enemies[enemies.length-1]=obj;
+		if (enterIndex % 30 == 0) {
+			FlyingObject obj = nextOne();
+			enemies = Arrays.copyOf(enemies, enemies.length + 1);
+			enemies[enemies.length - 1] = obj;
 		}
-		
+
 	}
-	
-	public void stepAction() {//10毫秒走一次
+
+	public void stepAction() {// 10毫秒走一次
 		sky.step();
-		
+
 		for (int i = 0; i < bts.length; i++) {
 			bts[i].step();
 		}
 		for (int i = 0; i < enemies.length; i++) {
 			enemies[i].step();
 		}
-		
+
 	}
-	int shootIndex=0;//子弹发射计数
-	/**子弹入场*/
-	public void shootAction() {//10毫秒走一次
+
+	int shootIndex = 0;// 子弹发射计数
+
+	/** 子弹入场 */
+	public void shootAction() {// 10毫秒走一次
 		shootIndex++;
-		if (shootIndex%10==0) {//每100毫秒走一次
-			Bullet[] bs=hero.shoot();
-			bts=Arrays.copyOf(bts, bts.length+bs.length);//bs有几发子弹就扩容几
-			System.arraycopy(bs, 0, bts,bts.length-bs.length,bs.length);
+		if (shootIndex % 20 == 0) {// 每100毫秒走一次
+			Bullet[] bs = hero.shoot();
+			bts = Arrays.copyOf(bts, bts.length + bs.length);// bs有几发子弹就扩容几
+			System.arraycopy(bs, 0, bts, bts.length - bs.length, bs.length);
 		}
 	}
-	/**删除越界的飞行物*/
+
+	/** 删除越界的飞行物 */
 	public void outOfBoundsAction() {
-		int index=0;
-		FlyingObject[] enemyLives=new FlyingObject[enemies.length];
+		int index = 0;
+		FlyingObject[] enemyLives = new FlyingObject[enemies.length];
 		for (int i = 0; i < enemies.length; i++) {
-			FlyingObject f=enemies[i];
+			FlyingObject f = enemies[i];
 			if (!f.outOfBounds()) {
-				enemyLives[index]=f;
+				enemyLives[index] = f;
 				index++;
 			}
 		}
-		enemies=Arrays.copyOf(enemyLives, index);
-		index=0;
+		enemies = Arrays.copyOf(enemyLives, index);
+		index = 0;
 	}
-	
-	/**删除越界子弹*/
+
+	/** 删除越界子弹 */
 	public void outOfBulletAction() {
 //		int index=0;
 //		Bullet[] btsLives=new Bullet[bts.length];
-//		for (int i = 0; i < btsLives.length; i++) {
+//		for (int i = 0; i < bts.length; i++) {
 //			Bullet b=bts[i];
 //			if (!b.outOfBounds()) {
 //				btsLives[index]=b;
@@ -98,34 +103,71 @@ public class World extends JPanel {
 //		bts=Arrays.copyOf(btsLives, index);
 //		index=0;
 	}
-	
-	/**程序启动执行*/
-	public void action() {// 启动执行测试代码
-		/**创建侦听器对象*/
-		MouseAdapter l=new MouseAdapter() {
-			public void mouseMoved(MouseEvent e) {
-				int x=e.getX();//获取鼠标x
-				int y=e.getY();//获取鼠标y
-				hero.moveTo(x, y);//调用英雄机随鼠标移动的方法
-			}	
-		};
-		this.addMouseListener(l);//处理鼠标移动事件
-		this.addMouseMotionListener(l);
-		
-		Timer timer=new Timer();//创建定时对象
-		timer.schedule(new TimerTask() {
-			@Override//重写计时方法
-			public void run() {
-			enterdAction();
-			System.out.println(enemies.length);
-			stepAction();//飞行物移动
-			shootAction(); //子弹入场
-			outOfBoundsAction();//删除越界的飞行物
-			outOfBulletAction();
-			repaint();//重画(重新调用paint()方法);
-			
+
+	int score = 0;
+
+	/** 子弹与敌人碰撞 */
+	private void bulletBoundAction() {
+		for (int i = 0; i < bts.length; i++) {
+			Bullet b = bts[i];
+			for (int j = 0; j < enemies.length; j++) {
+				FlyingObject f = enemies[j];
+				if (b.isLife() && f.isLife() && f.hit(b)) {
+					b.goDead();
+					f.goDead();
+					if (f instanceof Enemy) {
+						Enemy e = (Enemy) f;
+						score += e.getScore();
+					}
+					if (f instanceof Award) {
+						Award a = (Award) f;
+						int Type = a.getType();
+						switch (Type) {
+						case Award.DOUBLE_FIRE:
+							hero.addDoubleFire();
+							break;
+
+						case Award.LIFE:
+							hero.addLife();
+							break;
+						}
+					}
+				}
 			}
-		},10,10);//定时任务
+		}
+
+	}
+
+	/** 程序启动执行 */
+	public void action() {// 启动执行测试代码
+		/** 创建侦听器对象 */
+		MouseAdapter l = new MouseAdapter() {
+			public void mouseMoved(MouseEvent e) {
+				int x = e.getX();// 获取鼠标x
+				int y = e.getY();// 获取鼠标y
+				hero.moveTo(x, y);// 调用英雄机随鼠标移动的方法
+			}
+		};
+		this.addMouseListener(l);// 处理鼠标移动事件
+		this.addMouseMotionListener(l);
+
+		Timer timer = new Timer();// 创建定时对象
+		timer.schedule(new TimerTask() {
+			@Override // 重写计时方法
+			public void run() {
+				enterdAction();
+				System.out.println(enemies.length);
+				stepAction();// 飞行物移动
+				shootAction(); // 子弹入场
+				outOfBoundsAction();// 删除越界的飞行物
+				outOfBulletAction();// 删除越界的子弹
+				bulletBoundAction();
+				repaint();// 重画(重新调用paint()方法);
+
+			}
+
+		}, 10, 10);// 定时任务
+
 	}
 
 	/** 重写paint()方法 */
@@ -138,6 +180,9 @@ public class World extends JPanel {
 		for (int i = 0; i < bts.length; i++) {
 			bts[i].paintObject(g);
 		}
+
+		g.drawString("得分：" + score, 10, 25);
+		g.drawString("生命值：" + hero.getLife(), 10, 40);
 	}
 
 	public static void main(String[] args) {

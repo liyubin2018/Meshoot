@@ -25,26 +25,27 @@ public class Bee extends FlyingObject implements Award {
 		super(60, 50);
 		Random rand = new Random();
 		xspeed = 1;
-		yspeed = 1;
+		yspeed = 2;
 		awardType = rand.nextInt(2);
 	}
 
 	public void step() {
-		y+=yspeed;
-		x+=xspeed;
-		if (x<=0||x>=World.WIDTH) {//判断小蜜蜂是否移动到窗口边缘
-			xspeed*=-1;
+		y += yspeed;
+		x += xspeed;
+		if (x <= 0 || x >= World.WIDTH) {// 判断小蜜蜂是否移动到窗口边缘
+			xspeed *= -1;
 		}
 	}
-	
-	@Override//重写outOfBounds方法
+
+	@Override // 重写outOfBounds方法
 	public boolean outOfBounds() {
-		return this.y>=World.HEIGTH;
-		
+		return this.y >= World.HEIGTH;
+
 	}
-	
+
 	/** 重写getImage()方法，获取图片 */
 	private int deadIndex = 1;
+
 	public BufferedImage getImage() {
 		if (isLife()) {
 			return images[0];
@@ -58,8 +59,7 @@ public class Bee extends FlyingObject implements Award {
 		return null;
 	}
 
-	
-	public int getType() {		
+	public int getType() {
 		return awardType;
 	}
 }

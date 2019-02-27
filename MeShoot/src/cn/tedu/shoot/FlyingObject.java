@@ -21,8 +21,8 @@ public abstract class FlyingObject {
 	protected int height;// 高
 	protected int x;// x坐标
 	protected int y;// y坐标
-	
-	/**默认构造*/
+
+	/** 默认构造 */
 	public FlyingObject() {
 
 	}
@@ -68,9 +68,26 @@ public abstract class FlyingObject {
 	public boolean isRemove() {
 		return state == REMOVE;
 	}
-	
-	public abstract boolean outOfBounds();	
-	
+
+	/** 判断飞行物是否越界 */
+	public abstract boolean outOfBounds();
+
+	/** 检测敌人与子弹和英雄机是否碰撞 */
+	public boolean hit(FlyingObject other) {
+		int x1 = this.x - other.width;
+		int x2 = this.x + this.width;
+		int y1 = this.y - other.height;
+		int y2 = this.y + other.height;
+		int x = other.x;
+		int y = other.y;
+		return x >= x1 && x <= x2 && y >= y1 && y <= y2;
+	}
+
+	/** 飞行物死亡 */
+	public void goDead() {
+		state = DEAD;
+	}
+
 	public static BufferedImage loadImage(String fileName) {
 		try {
 			BufferedImage img = ImageIO.read(FlyingObject.class.getResource(fileName));
