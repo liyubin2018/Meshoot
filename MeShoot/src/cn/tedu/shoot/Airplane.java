@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * @author liyub
  *
  */
-public class Airplane extends FlyingObject {
+public class Airplane extends FlyingObject implements Enemy{
 	private static BufferedImage[] images;
 	static {
 		images = new BufferedImage[5];
@@ -26,7 +26,8 @@ public class Airplane extends FlyingObject {
 	public void step() {
 		y+=speed;//小敌机向下移动
 	}
-
+	
+	
 	@Override//重写outOfBounds方法
 	public boolean outOfBounds() {
 		return this.y>=World.HEIGTH;
@@ -46,5 +47,12 @@ public class Airplane extends FlyingObject {
 		}
 		return null;
 	}
+
+	public int getScore() {
+		
+		return 1;
+	}
+
+	
 
 }

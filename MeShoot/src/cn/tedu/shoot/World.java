@@ -88,7 +88,7 @@ public class World extends JPanel {
 	public void outOfBulletAction() {
 //		int index=0;
 //		Bullet[] btsLives=new Bullet[bts.length];
-//		for (int i = 0; i < bts.length; i++) {
+//		for (int i = 0; i < btsLives.length; i++) {
 //			Bullet b=bts[i];
 //			if (!b.outOfBounds()) {
 //				btsLives[index]=b;

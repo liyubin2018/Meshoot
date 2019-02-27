@@ -9,7 +9,7 @@ import java.util.Random;
  * @author liyub
  *
  */
-public class Bee extends FlyingObject {
+public class Bee extends FlyingObject implements Award {
 	private static BufferedImage[] images;
 	static {
 		images = new BufferedImage[5];
@@ -56,5 +56,10 @@ public class Bee extends FlyingObject {
 			return img;
 		}
 		return null;
+	}
+
+	
+	public int getType() {		
+		return awardType;
 	}
 }

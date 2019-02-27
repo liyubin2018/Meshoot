@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
  * @author liyub
  *
  */
-	public class BigAirplane extends FlyingObject {
+	public class BigAirplane extends FlyingObject implements Enemy{
 	private static BufferedImage[] images;
 	static {
 		images = new BufferedImage[5];
@@ -46,6 +46,11 @@ import java.awt.image.BufferedImage;
 			return img;
 		}
 		return null;
+	}
+	/**重写getScore方法*/
+	public int getScore() {
+		
+		return 3;
 	}
 
 }
