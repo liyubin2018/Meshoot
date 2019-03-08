@@ -87,11 +87,10 @@ public abstract class FlyingObject {
 	public void goDead() {
 		state = DEAD;
 	}
-
+	/**读取图片*/
 	public static BufferedImage loadImage(String fileName) {
 		try {
 			BufferedImage img = ImageIO.read(FlyingObject.class.getResource(fileName));
-
 			return img;
 		} catch (Exception e) {
 			e.printStackTrace();

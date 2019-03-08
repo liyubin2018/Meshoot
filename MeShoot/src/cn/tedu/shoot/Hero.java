@@ -15,12 +15,12 @@ public class Hero extends FlyingObject {
 		}
 	}
 	private int life;// 生命
-	private int doublefire;
+	private int doubleFire;
 
 	public Hero() {
 		super(97, 124, 140, 400);
 		this.life = 3;
-		this.doublefire = 0;
+		this.doubleFire = 0;
 	}
 
 	/**
@@ -66,11 +66,11 @@ public class Hero extends FlyingObject {
 	public Bullet[] shoot() {
 		int xStep = this.width / 4;
 		int yStep = 10;
-		if (doublefire > 0) {// 双倍火力
+		if (doubleFire > 0) {// 双倍火力
 			Bullet[] bs = new Bullet[2];
 			bs[0] = new Bullet(this.x + 1 * xStep, this.y - yStep);
 			bs[1] = new Bullet(this.x + 3 * xStep, this.y - yStep);
-			doublefire -= 2;// 火力值减2
+			doubleFire -= 2;// 火力值减2
 			return bs;
 		} else {// 单倍火力
 			Bullet[] bs = new Bullet[1];
@@ -79,17 +79,24 @@ public class Hero extends FlyingObject {
 		}
 	}
 
-	public void addLife() {
+	public void addLife() {//加命
 		life++;
 	}
-
+	/**减命*/
+	public void subtractLife() {
+		life--;
+	}
+	/**火力值清零*/
+	public void clearDoubleFire() {
+		doubleFire=0;
+	}
 	public int getLife() {
-		return life;
+		return life;//返回命数
 	}
 
 	/** 英雄机火力值怎加40 */
 	public void addDoubleFire() {
-		doublefire += 40;
+		doubleFire += 40;
 	}
 
 }
